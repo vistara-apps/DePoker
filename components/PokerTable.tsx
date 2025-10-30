@@ -22,7 +22,11 @@ export interface Player {
   isBigBlind?: boolean;
 }
 
-export function PokerTable() {
+interface PokerTableProps {
+  tableId: string;
+}
+
+export function PokerTable({ tableId }: PokerTableProps) {
   const { address, isConnected } = useAccount();
   const [gameState, setGameState] = useState<GameState>('waiting');
   const [pot, setPot] = useState(0);

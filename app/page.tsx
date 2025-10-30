@@ -3,6 +3,9 @@ import { Header } from '@/components/Header';
 import { TableLobby } from '@/components/TableLobby';
 
 export default function Home() {
+  // Default table ID (can be made dynamic later)
+  const tableId = process.env.NEXT_PUBLIC_TABLE_ID || 'default-table';
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -16,7 +19,7 @@ export default function Home() {
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
-            <PokerTable />
+            <PokerTable tableId={tableId} />
           </div>
           <div>
             <TableLobby />

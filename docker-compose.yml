@@ -1,0 +1,154 @@
+version: '3.8'
+
+services:
+  dealer:
+    build: .
+    command: npm run dealer
+    ports:
+      - "3000:3000"
+    environment:
+      - TABLE_ID=${TABLE_ID}
+      - POT_SIZE_USD=${POT_SIZE_USD:-10}
+      - RAKE_BPS=${RAKE_BPS:-500}
+      - MAX_HANDS=${MAX_HANDS:-1000}
+      - PLAYER_COUNT=${PLAYER_COUNT:-9}
+      - CHAIN_ID=${CHAIN_ID:-56}
+      - TOKEN_ADDRESS=${TOKEN_ADDRESS}
+      - ESCROW_ADDRESS=${ESCROW_ADDRESS}
+      - FACILITATOR_ADDRESS=${FACILITATOR_ADDRESS}
+      - RPC_URL=${RPC_URL}
+      - FACILITATOR_URL=http://facilitator:3002
+      - PLAYER_AGENT_BASE_URL=http://player
+      - AUTO_START=true
+    depends_on:
+      - facilitator
+      - player-0
+      - player-1
+      - player-2
+      - player-3
+      - player-4
+      - player-5
+      - player-6
+      - player-7
+      - player-8
+
+  facilitator:
+    build: .
+    command: npm run facilitator
+    ports:
+      - "3002:3002"
+    environment:
+      - RELAYER_PRIVATE_KEY=${RELAYER_PRIVATE_KEY}
+      - CHAIN_ID=${CHAIN_ID:-56}
+      - TOKEN_ADDRESS=${TOKEN_ADDRESS}
+      - ESCROW_ADDRESS=${ESCROW_ADDRESS}
+      - RPC_URL=${RPC_URL}
+      - FACILITATOR_PORT=3002
+
+  player-0:
+    build: .
+    command: npm run player
+    ports:
+      - "3001:3001"
+    environment:
+      - PLAYER_ID=0
+      - PLAYER_PORT=3001
+      - ZARA_API_KEY=${ZARA_API_KEY_0:-}
+      - ZARA_ROOM_ID=${ZARA_ROOM_ID_0:-}
+      - PLAYER_0_ADDRESS=${PLAYER_0_ADDRESS}
+
+  player-1:
+    build: .
+    command: npm run player
+    ports:
+      - "3011:3001"
+    environment:
+      - PLAYER_ID=1
+      - PLAYER_PORT=3001
+      - ZARA_API_KEY=${ZARA_API_KEY_1:-}
+      - ZARA_ROOM_ID=${ZARA_ROOM_ID_1:-}
+      - PLAYER_1_ADDRESS=${PLAYER_1_ADDRESS}
+
+  player-2:
+    build: .
+    command: npm run player
+    ports:
+      - "3012:3001"
+    environment:
+      - PLAYER_ID=2
+      - PLAYER_PORT=3001
+      - ZARA_API_KEY=${ZARA_API_KEY_2:-}
+      - ZARA_ROOM_ID=${ZARA_ROOM_ID_2:-}
+      - PLAYER_2_ADDRESS=${PLAYER_2_ADDRESS}
+
+  player-3:
+    build: .
+    command: npm run player
+    ports:
+      - "3013:3001"
+    environment:
+      - PLAYER_ID=3
+      - PLAYER_PORT=3001
+      - ZARA_API_KEY=${ZARA_API_KEY_3:-}
+      - ZARA_ROOM_ID=${ZARA_ROOM_ID_3:-}
+      - PLAYER_3_ADDRESS=${PLAYER_3_ADDRESS}
+
+  player-4:
+    build: .
+    command: npm run player
+    ports:
+      - "3014:3001"
+    environment:
+      - PLAYER_ID=4
+      - PLAYER_PORT=3001
+      - ZARA_API_KEY=${ZARA_API_KEY_4:-}
+      - ZARA_ROOM_ID=${ZARA_ROOM_ID_4:-}
+      - PLAYER_4_ADDRESS=${PLAYER_4_ADDRESS}
+
+  player-5:
+    build: .
+    command: npm run player
+    ports:
+      - "3015:3001"
+    environment:
+      - PLAYER_ID=5
+      - PLAYER_PORT=3001
+      - ZARA_API_KEY=${ZARA_API_KEY_5:-}
+      - ZARA_ROOM_ID=${ZARA_ROOM_ID_5:-}
+      - PLAYER_5_ADDRESS=${PLAYER_5_ADDRESS}
+
+  player-6:
+    build: .
+    command: npm run player
+    ports:
+      - "3016:3001"
+    environment:
+      - PLAYER_ID=6
+      - PLAYER_PORT=3001
+      - ZARA_API_KEY=${ZARA_API_KEY_6:-}
+      - ZARA_ROOM_ID=${ZARA_ROOM_ID_6:-}
+      - PLAYER_6_ADDRESS=${PLAYER_6_ADDRESS}
+
+  player-7:
+    build: .
+    command: npm run player
+    ports:
+      - "3017:3001"
+    environment:
+      - PLAYER_ID=7
+      - PLAYER_PORT=3001
+      - ZARA_API_KEY=${ZARA_API_KEY_7:-}
+      - ZARA_ROOM_ID=${ZARA_ROOM_ID_7:-}
+      - PLAYER_7_ADDRESS=${PLAYER_7_ADDRESS}
+
+  player-8:
+    build: .
+    command: npm run player
+    ports:
+      - "3018:3001"
+    environment:
+      - PLAYER_ID=8
+      - PLAYER_PORT=3001
+      - ZARA_API_KEY=${ZARA_API_KEY_8:-}
+      - ZARA_ROOM_ID=${ZARA_ROOM_ID_8:-}
+      - PLAYER_8_ADDRESS=${PLAYER_8_ADDRESS}
